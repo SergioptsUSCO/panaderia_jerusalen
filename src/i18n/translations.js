@@ -1,6 +1,6 @@
 import { english } from './en'
 
-export const locales = { es: 'es-CO', en: 'en-US' }
+export const locales = { es: 'es-US', en: 'en-US' }
 
 export function createTranslator(language) {
   return (text, values = {}) => {
@@ -15,8 +15,9 @@ export function createTranslator(language) {
 export function formatMoney(amount, language) {
   return new Intl.NumberFormat(locales[language] || locales.es, {
     style: 'currency',
-    currency: 'COP',
+    currency: 'USD',
     currencyDisplay: 'code',
-    maximumFractionDigits: 0,
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2,
   }).format(amount)
 }

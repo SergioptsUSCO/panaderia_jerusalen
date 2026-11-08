@@ -41,7 +41,7 @@ export const products = [
     id: 1,
     name: 'Pan campesino',
     category: 'panes',
-    price: 5000,
+    price: 5.00,
     description:
       'Pan artesanal de corteza dorada, miga suave y sabor tradicional.',
     image:
@@ -53,7 +53,7 @@ export const products = [
     id: 2,
     name: 'Pan de queso',
     category: 'panes',
-    price: 3500,
+    price: 3.50,
     description:
       'Suave por dentro, ligeramente dorado y preparado con queso.',
     image:
@@ -65,7 +65,7 @@ export const products = [
     id: 3,
     name: 'Croissant artesanal',
     category: 'hojaldres',
-    price: 4500,
+    price: 4.50,
     description:
       'Capas crujientes de masa hojaldrada con un delicado sabor a mantequilla.',
     image:
@@ -77,7 +77,7 @@ export const products = [
     id: 4,
     name: 'Croissant de chocolate',
     category: 'hojaldres',
-    price: 5500,
+    price: 5.50,
     description:
       'Croissant artesanal relleno de chocolate y horneado cada mañana.',
     image:
@@ -89,7 +89,7 @@ export const products = [
     id: 5,
     name: 'Torta de chocolate',
     category: 'pasteleria',
-    price: 8000,
+    price: 8.00,
     description:
       'Porción de torta húmeda de chocolate con una cobertura suave y cremosa.',
     image:
@@ -101,7 +101,7 @@ export const products = [
     id: 6,
     name: 'Torta de zanahoria',
     category: 'pasteleria',
-    price: 7500,
+    price: 7.50,
     description:
       'Torta casera de zanahoria con especias y una cubierta cremosa.',
     image:
@@ -113,7 +113,7 @@ export const products = [
     id: 7,
     name: 'Pastel de pollo',
     category: 'salados',
-    price: 6500,
+    price: 6.50,
     description:
       'Masa dorada y crujiente con relleno casero de pollo.',
     image:
@@ -125,7 +125,7 @@ export const products = [
     id: 8,
     name: 'Sándwich de la casa',
     category: 'salados',
-    price: 9000,
+    price: 9.00,
     description:
       'Pan artesanal acompañado de ingredientes frescos y preparado al momento.',
     image:
@@ -137,7 +137,7 @@ export const products = [
     id: 9,
     name: 'Café americano',
     category: 'bebidas',
-    price: 4000,
+    price: 4.00,
     description:
       'Café recién preparado, perfecto para acompañar nuestros panes.',
     image:
@@ -149,7 +149,7 @@ export const products = [
     id: 10,
     name: 'Cappuccino',
     category: 'bebidas',
-    price: 6000,
+    price: 6.00,
     description:
       'Espresso acompañado de leche vaporizada y una cremosa capa de espuma.',
     image:

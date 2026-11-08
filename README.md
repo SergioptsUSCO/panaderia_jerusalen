@@ -8,7 +8,8 @@ El selector **ES / EN** traduce la interfaz, el catálogo, el carrito y el
 formulario. La preferencia se guarda en el navegador; al visitar por primera
 vez se usa inglés si el navegador está configurado en inglés y español en
 los demás casos. Las traducciones se mantienen en `src/i18n/en.js`.
-El formato de precios cambia con el idioma y conserva los valores en COP.
+Los precios se almacenan en dólares estadounidenses (USD) y se muestran con
+dos decimales en ambos idiomas, también en el carrito y los mensajes de pedido.
 
 La dirección está configurada en `src/data/business.js` como
 **433 NY-52, Woodbourne, NY 12788**. Nominatim restringe la búsqueda a Estados
