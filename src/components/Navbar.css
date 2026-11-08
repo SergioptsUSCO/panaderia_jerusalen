@@ -94,11 +94,13 @@
   transition: width 0.25s ease;
 }
 
-.navbar__links a:hover {
+.navbar__links a:hover,
+.navbar__links a[aria-current='page'] {
   color: var(--color-terracotta);
 }
 
-.navbar__links a:hover::after {
+.navbar__links a:hover::after,
+.navbar__links a[aria-current='page']::after {
   width: 100%;
 }
 
@@ -438,7 +440,31 @@
 
 /* TABLET */
 
+.navbar__mobile-links {
+  display: none;
+}
+
 @media (max-width: 850px) {
+
+  .navbar__mobile-links {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding: 16px;
+    margin-top: 16px;
+    border-top: 1px solid rgba(56, 37, 27, 0.1);
+    background: var(--color-cream);
+  }
+
+  .navbar__mobile-links a {
+    padding: 10px 16px;
+    color: var(--color-coffee);
+    font-weight: 600;
+  }
+
+  .navbar__mobile-links a[aria-current='page'] {
+    color: var(--color-terracotta);
+  }
 
   .navbar__container {
     gap: 20px;
