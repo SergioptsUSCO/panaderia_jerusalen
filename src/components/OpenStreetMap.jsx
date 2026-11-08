@@ -1,3 +1,4 @@
+import { useI18n } from '../i18n/useI18n'
 import {
   useEffect,
   useRef,
@@ -16,6 +17,8 @@ import {
 import './OpenStreetMap.css'
 
 function OpenStreetMap() {
+  const { t } = useI18n()
+
   const mapContainerRef =
     useRef(null)
 
@@ -163,7 +166,7 @@ function OpenStreetMap() {
         ref={mapContainerRef}
         className="open-street-map"
         aria-label={
-          `Mapa de ${business.name}`
+          t('Mapa de {name}', { name: business.name })
         }
       />
 
@@ -172,14 +175,9 @@ function OpenStreetMap() {
 
           <span>📍</span>
 
-          <strong>
-            Buscando ubicación...
-          </strong>
+          <strong>{t("Buscando ubicación...")}</strong>
 
-          <p>
-            Estamos localizando la panadería
-            en el mapa.
-          </p>
+          <p>{t("Estamos localizando la panadería en el mapa.")}</p>
 
         </div>
       )}
@@ -192,7 +190,7 @@ function OpenStreetMap() {
           <span>📍</span>
 
           <span>
-            {locationStatus}
+            {t(locationStatus)}
           </span>
 
         </div>

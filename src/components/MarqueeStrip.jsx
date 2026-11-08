@@ -1,3 +1,4 @@
+import { useI18n } from '../i18n/useI18n'
 import './MarqueeStrip.css'
 
 const items = [
@@ -9,19 +10,21 @@ const items = [
 ]
 
 function MarqueeStrip() {
+  const { t } = useI18n()
+
   return (
     <section
       className="marquee"
-      aria-label="Productos de Panadería Jerusalén"
+      aria-label={t("Productos de Panadería Jerusalén")}
     >
       <div className="marquee__track">
 
         {[...items, ...items].map((item, index) => (
           <div
             className="marquee__item"
-            key={`${item}-${index}`}
+            key={`${t(item)}-${index}`}
           >
-            <span>{item}</span>
+            <span>{t(item)}</span>
             <strong>✦</strong>
           </div>
         ))}

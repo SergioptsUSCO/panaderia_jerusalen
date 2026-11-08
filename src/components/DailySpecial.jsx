@@ -1,3 +1,4 @@
+import { useI18n } from '../i18n/useI18n'
 import { products } from '../data/products'
 
 import './DailySpecial.css'
@@ -5,18 +6,14 @@ import './DailySpecial.css'
 function DailySpecial({
   onAddToCart,
 }) {
+  const { t, formatPrice } = useI18n()
+
   const specialProduct =
     products.find(
       (product) => product.id === 3
     )
 
-  const formatPrice = (price) => {
-    return new Intl.NumberFormat('es-CO', {
-      style: 'currency',
-      currency: 'COP',
-      maximumFractionDigits: 0,
-    }).format(price)
-  }
+
 
   return (
     <section className="daily-special">
@@ -25,26 +22,18 @@ function DailySpecial({
 
         <div className="daily-special__content">
 
-          <span className="daily-special__eyebrow">
-            RECOMENDADO DE LA CASA
-          </span>
+          <span className="daily-special__eyebrow">{t("RECOMENDADO DE LA CASA")}</span>
 
-          <h2 className="daily-special__title">
-            Un favorito para
-            <span> acompañar tu día.</span>
+          <h2 className="daily-special__title">{t("Un favorito para")}<span>{t(" acompañar tu día.")}</span>
           </h2>
 
-          <p className="daily-special__description">
-            Nuestro croissant artesanal combina una
-            textura ligera y crujiente con un interior
-            suave. Perfecto para acompañar con café.
-          </p>
+          <p className="daily-special__description">{t("Nuestro croissant artesanal combina una textura ligera y crujiente con un interior suave. Perfecto para acompañar con café.")}</p>
 
           <div className="daily-special__bottom">
 
             <div className="daily-special__price">
 
-              <span>Precio</span>
+              <span>{t("Precio")}</span>
 
               <strong>
                 {formatPrice(specialProduct.price)}
@@ -58,9 +47,7 @@ function DailySpecial({
               onClick={() =>
                 onAddToCart(specialProduct)
               }
-            >
-              Agregar al pedido
-              <span>+</span>
+            >{t("Agregar al pedido")}<span>+</span>
             </button>
 
           </div>
@@ -71,14 +58,14 @@ function DailySpecial({
 
           <img
             src={specialProduct.image}
-            alt={specialProduct.name}
+            alt={t(specialProduct.name)}
           />
 
           <div className="daily-special__label">
-            <span>Recomendado</span>
+            <span>{t("Recomendado")}</span>
 
             <strong>
-              {specialProduct.name}
+              {t(specialProduct.name)}
             </strong>
           </div>
 

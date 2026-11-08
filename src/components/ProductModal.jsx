@@ -1,3 +1,4 @@
+import { useI18n } from '../i18n/useI18n'
 import {
   useEffect,
   useState,
@@ -10,6 +11,8 @@ function ProductModal({
   onClose,
   onAddToCart,
 }) {
+  const { t, formatPrice } = useI18n()
+
   const [quantity, setQuantity] =
     useState(1)
 
@@ -48,16 +51,7 @@ function ProductModal({
     return null
   }
 
-  const formatPrice = (price) => {
-    return new Intl.NumberFormat(
-      'es-CO',
-      {
-        style: 'currency',
-        currency: 'COP',
-        maximumFractionDigits: 0,
-      }
-    ).format(price)
-  }
+
 
   const total =
     product.price * quantity
@@ -105,22 +99,18 @@ function ProductModal({
           type="button"
           className="product-modal__close"
           onClick={onClose}
-          aria-label="Cerrar detalle"
-        >
-          ×
-        </button>
+          aria-label={t("Cerrar detalle")}
+        >{t("×")}</button>
 
         <div className="product-modal__image">
 
           <img
             src={product.image}
-            alt={product.name}
+            alt={t(product.name)}
           />
 
           {product.featured && (
-            <span className="product-modal__featured">
-              Favorito
-            </span>
+            <span className="product-modal__featured">{t("Favorito")}</span>
           )}
 
         </div>
@@ -128,11 +118,11 @@ function ProductModal({
         <div className="product-modal__content">
 
           <span className="product-modal__category">
-            {product.category}
+            {t({ panes: 'Panes', hojaldres: 'Hojaldres', pasteleria: 'Pastelería', salados: 'Salados', bebidas: 'Bebidas' }[product.category] || product.category)}
           </span>
 
           <h2>
-            {product.name}
+            {t(product.name)}
           </h2>
 
           <strong className="product-modal__price">
@@ -140,7 +130,7 @@ function ProductModal({
           </strong>
 
           <p className="product-modal__description">
-            {product.description}
+            {t(product.description)}
           </p>
 
           <div className="product-modal__separator" />
@@ -148,14 +138,9 @@ function ProductModal({
           <div className="product-modal__quantity-section">
 
             <div>
-              <span className="product-modal__label">
-                CANTIDAD
-              </span>
+              <span className="product-modal__label">{t("CANTIDAD")}</span>
 
-              <p>
-                Selecciona cuántas unidades
-                quieres agregar.
-              </p>
+              <p>{t("Selecciona cuántas unidades quieres agregar.")}</p>
             </div>
 
             <div className="product-modal__quantity">
@@ -163,7 +148,7 @@ function ProductModal({
               <button
                 type="button"
                 onClick={decreaseQuantity}
-                aria-label="Disminuir cantidad"
+                aria-label={t("Disminuir cantidad")}
               >
                 −
               </button>
@@ -175,7 +160,7 @@ function ProductModal({
               <button
                 type="button"
                 onClick={increaseQuantity}
-                aria-label="Aumentar cantidad"
+                aria-label={t("Aumentar cantidad")}
               >
                 +
               </button>
@@ -190,9 +175,7 @@ function ProductModal({
             onClick={handleAdd}
           >
 
-            <span>
-              Agregar al pedido
-            </span>
+            <span>{t("Agregar al pedido")}</span>
 
             <strong>
               {formatPrice(total)}

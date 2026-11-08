@@ -1,3 +1,4 @@
+import { useI18n } from '../i18n/useI18n'
 import { useState } from 'react'
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
@@ -6,6 +7,8 @@ import CartDrawer from '../components/CartDrawer'
 import CheckoutPanel from '../components/CheckoutPanel'
 
 function Menu() {
+  const { t } = useI18n()
+
   const [cart, setCart] = useState([])
   const [activePanel, setActivePanel] = useState(null)
 
@@ -45,7 +48,7 @@ function Menu() {
         onOpenCart={() => setActivePanel('cart')}
       />
 
-      <main aria-label="Menú de productos">
+      <main aria-label={t("Menú de productos")}>
         <ProductsSection onAddToCart={handleAddToCart} />
       </main>
 

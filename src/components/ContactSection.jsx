@@ -1,3 +1,4 @@
+import { useI18n } from '../i18n/useI18n'
 import OpenStreetMap from './OpenStreetMap'
 
 import { business } from '../data/business'
@@ -5,9 +6,11 @@ import { business } from '../data/business'
 import './ContactSection.css'
 
 function ContactSection() {
+  const { t } = useI18n()
+
   const directionsUrl =
-    'https://www.openstreetmap.org/search' +
-    `?query=${encodeURIComponent(
+    'https://www.google.com/maps/dir/?api=1' +
+    `&destination=${encodeURIComponent(
       business.address
     )}`
 
@@ -20,19 +23,12 @@ function ContactSection() {
 
         <div className="contact-section__header">
 
-          <span className="contact-section__eyebrow">
-            VEN A VISITARNOS
-          </span>
+          <span className="contact-section__eyebrow">{t("VEN A VISITARNOS")}</span>
 
-          <h2 className="contact-section__title">
-            Siempre hay algo
-            <span> recién horneado.</span>
+          <h2 className="contact-section__title">{t("Siempre hay algo")}<span>{t(" recién horneado.")}</span>
           </h2>
 
-          <p>
-            Visítanos, conoce nuestros productos
-            y disfruta del sabor de Panadería Jerusalén.
-          </p>
+          <p>{t("Visítanos, conoce nuestros productos y disfruta del sabor de Panadería Jerusalén.")}</p>
 
         </div>
 
@@ -52,9 +48,7 @@ function ContactSection() {
 
               <div>
 
-                <span className="contact-card__label">
-                  UBICACIÓN
-                </span>
+                <span className="contact-card__label">{t("UBICACIÓN")}</span>
 
                 <h3>
                   {business.address}
@@ -64,9 +58,7 @@ function ContactSection() {
                   href={directionsUrl}
                   target="_blank"
                   rel="noreferrer"
-                >
-                  Ver en el mapa
-                  <span>↗</span>
+                >{t("Ver en el mapa")}<span>↗</span>
                 </a>
 
               </div>
@@ -81,9 +73,7 @@ function ContactSection() {
 
               <div>
 
-                <span className="contact-card__label">
-                  CONTACTO
-                </span>
+                <span className="contact-card__label">{t("CONTACTO")}</span>
 
                 <a
                   className="contact-card__main-link"
@@ -111,9 +101,7 @@ function ContactSection() {
 
               <div className="contact-card__schedule">
 
-                <span className="contact-card__label">
-                  HORARIOS
-                </span>
+                <span className="contact-card__label">{t("HORARIOS")}</span>
 
                 {business.schedule.map((item) => (
                   <div
@@ -121,11 +109,11 @@ function ContactSection() {
                     key={item.days}
                   >
                     <span>
-                      {item.days}
+                      {t(item.days)}
                     </span>
 
                     <strong>
-                      {item.hours}
+                      {t(item.hours)}
                     </strong>
                   </div>
                 ))}

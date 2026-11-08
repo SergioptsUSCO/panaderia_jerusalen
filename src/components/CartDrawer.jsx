@@ -1,3 +1,4 @@
+import { useI18n } from '../i18n/useI18n'
 import './CartDrawer.css'
 
 function CartDrawer({
@@ -9,13 +10,9 @@ function CartDrawer({
   onRemove,
   onCheckout,
 }) {
-  const formatPrice = (price) => {
-    return new Intl.NumberFormat('es-CO', {
-      style: 'currency',
-      currency: 'COP',
-      maximumFractionDigits: 0,
-    }).format(price)
-  }
+  const { t, formatPrice } = useI18n()
+
+
 
   const subtotal = cart.reduce(
     (total, item) =>
@@ -45,21 +42,17 @@ function CartDrawer({
         <div className="cart-drawer__header">
 
           <div>
-            <span className="cart-drawer__eyebrow">
-              PANADERÍA JERUSALÉN
-            </span>
+            <span className="cart-drawer__eyebrow">{t("PANADERÍA JERUSALÉN")}</span>
 
-            <h2>Tu pedido</h2>
+            <h2>{t("Tu pedido")}</h2>
           </div>
 
           <button
             type="button"
             className="cart-drawer__close"
             onClick={onClose}
-            aria-label="Cerrar carrito"
-          >
-            ×
-          </button>
+            aria-label={t("Cerrar carrito")}
+          >{t("×")}</button>
 
         </div>
 
@@ -71,18 +64,14 @@ function CartDrawer({
 
               <span>🥐</span>
 
-              <h3>Tu pedido está vacío</h3>
+              <h3>{t("Tu pedido está vacío")}</h3>
 
-              <p>
-                Agrega algunos productos del menú para comenzar.
-              </p>
+              <p>{t("Agrega algunos productos del menú para comenzar.")}</p>
 
               <button
                 type="button"
                 onClick={onClose}
-              >
-                Ver productos
-              </button>
+              >{t("Ver productos")}</button>
 
             </div>
 
@@ -99,7 +88,7 @@ function CartDrawer({
 
                   <img
                     src={item.image}
-                    alt={item.name}
+                    alt={t(item.name)}
                   />
 
                   <div className="cart-item__information">
@@ -107,7 +96,7 @@ function CartDrawer({
                     <div className="cart-item__top">
 
                       <div>
-                        <h3>{item.name}</h3>
+                        <h3>{t(item.name)}</h3>
 
                         <span>
                           {formatPrice(item.price)}
@@ -120,9 +109,7 @@ function CartDrawer({
                         onClick={() =>
                           onRemove(item.id)
                         }
-                      >
-                        Eliminar
-                      </button>
+                      >{t("Eliminar")}</button>
 
                     </div>
 
@@ -170,7 +157,7 @@ function CartDrawer({
 
             <div className="cart-drawer__subtotal">
 
-              <span>Subtotal</span>
+              <span>{t("Subtotal")}</span>
 
               <strong>
                 {formatPrice(subtotal)}
@@ -178,17 +165,13 @@ function CartDrawer({
 
             </div>
 
-            <p>
-              El costo de domicilio se calculará posteriormente.
-            </p>
+            <p>{t("El costo de domicilio se calculará posteriormente.")}</p>
 
             <button
               type="button"
               className="cart-drawer__checkout"
               onClick={onCheckout}
-            >
-              Continuar pedido
-              <span>→</span>
+            >{t("Continuar pedido")}<span>→</span>
             </button>
 
           </div>

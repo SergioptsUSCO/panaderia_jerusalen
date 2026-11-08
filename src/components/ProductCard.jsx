@@ -1,3 +1,4 @@
+import { useI18n } from '../i18n/useI18n'
 import './ProductCard.css'
 
 function ProductCard({
@@ -5,13 +6,9 @@ function ProductCard({
   onAddToCart,
   onViewProduct,
 }) {
-  const formatPrice = (price) => {
-    return new Intl.NumberFormat('es-CO', {
-      style: 'currency',
-      currency: 'COP',
-      maximumFractionDigits: 0,
-    }).format(price)
-  }
+  const { t, formatPrice } = useI18n()
+
+
 
   const getCategoryName = (category) => {
     const categoryNames = {
@@ -35,20 +32,18 @@ function ProductCard({
         onClick={() =>
           onViewProduct(product)
         }
-        aria-label={`Ver detalles de ${product.name}`}
+        aria-label={t('Ver detalles de {name}', { name: t(product.name) })}
       >
 
         <img
           src={product.image}
-          alt={product.name}
+          alt={t(product.name)}
           className="product-card__image"
           loading="lazy"
         />
 
         {product.featured && (
-          <span className="product-card__featured">
-            Favorito
-          </span>
+          <span className="product-card__featured">{t("Favorito")}</span>
         )}
 
       </button>
@@ -57,7 +52,7 @@ function ProductCard({
       <div className="product-card__content">
 
         <span className="product-card__category">
-          {getCategoryName(product.category)}
+          {t(getCategoryName(product.category))}
         </span>
 
         <button
@@ -68,7 +63,7 @@ function ProductCard({
           }
         >
           <h3 className="product-card__title">
-            {product.name}
+            {t(product.name)}
           </h3>
         </button>
 
@@ -78,9 +73,7 @@ function ProductCard({
           onClick={() =>
             onViewProduct(product)
           }
-        >
-          Ver detalles
-          <span>→</span>
+        >{t("Ver detalles")}<span>→</span>
         </button>
 
         <div className="product-card__footer">
@@ -96,9 +89,7 @@ function ProductCard({
               onAddToCart(product)
             }
           >
-            <span>+</span>
-            Agregar
-          </button>
+            <span>+</span>{t("Agregar")}</button>
 
         </div>
 

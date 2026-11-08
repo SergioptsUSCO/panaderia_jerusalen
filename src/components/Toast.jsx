@@ -1,3 +1,4 @@
+import { useI18n } from '../i18n/useI18n'
 import {
   useEffect,
 } from 'react'
@@ -8,6 +9,8 @@ function Toast({
   message,
   onClose,
 }) {
+  const { t } = useI18n()
+
   useEffect(() => {
     if (!message) {
       return
@@ -39,12 +42,10 @@ function Toast({
 
       <div className="toast__content">
 
-        <span>
-          AGREGADO AL PEDIDO
-        </span>
+        <span>{t("AGREGADO AL PEDIDO")}</span>
 
         <strong>
-          {message}
+          {t(message)}
         </strong>
 
       </div>
@@ -53,10 +54,8 @@ function Toast({
         type="button"
         className="toast__close"
         onClick={onClose}
-        aria-label="Cerrar notificación"
-      >
-        ×
-      </button>
+        aria-label={t("Cerrar notificación")}
+      >{t("×")}</button>
 
     </div>
   )

@@ -116,6 +116,34 @@
   flex-shrink: 0;
 }
 
+.navbar__language {
+  min-height: 38px;
+  padding: 6px;
+  border: 1px solid rgba(56, 37, 27, 0.2);
+  border-radius: 8px;
+  background: var(--color-cream);
+  color: var(--color-coffee);
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.navbar__language:focus-visible {
+  outline: 3px solid var(--color-golden);
+  outline-offset: 3px;
+}
+
+@media (min-width: 851px) and (max-width: 1100px) {
+  .navbar__container { gap: 14px; }
+  .navbar__links { gap: 18px; }
+  .navbar__brand-logo { width: 170px; }
+}
+
+@media (max-width: 380px) {
+  .navbar__brand-logo { max-width: 100px; }
+  .navbar__language { padding-inline: 2px; }
+}
+
 
 /* BOTÓN PEDIDO */
 

@@ -1,9 +1,12 @@
+import { useI18n } from '../i18n/useI18n'
 import { business } from '../data/business'
 import logo from '../assets/logo/jerusalen-logo.svg'
 
 import './Footer.css'
 
 function Footer() {
+  const { t } = useI18n()
+
   return (
     <footer className="footer">
 
@@ -15,7 +18,7 @@ function Footer() {
 
             <img
               src={logo}
-              alt="Panadería Jerusalén"
+              alt={t("Panadería Jerusalén")}
               className="footer__brand-logo"
             />
 
@@ -23,9 +26,7 @@ function Footer() {
 
           <div>
 
-            <span className="footer__label">
-              CONTACTO
-            </span>
+            <span className="footer__label">{t("CONTACTO")}</span>
 
             <div className="footer__links">
 
@@ -43,23 +44,17 @@ function Footer() {
 
           <div>
 
-            <span className="footer__label">
-              SÍGUENOS
-            </span>
+            <span className="footer__label">{t("SÍGUENOS")}</span>
 
             <div className="footer__links">
 
               <a
                 href={business.social.instagram}
-              >
-                Instagram
-              </a>
+              >{t("Instagram")}</a>
 
               <a
                 href={business.social.facebook}
-              >
-                Facebook
-              </a>
+              >{t("Facebook")}</a>
 
             </div>
 
@@ -73,9 +68,7 @@ function Footer() {
             © {new Date().getFullYear()} {business.name}
           </span>
 
-          <span>
-            Todos los derechos reservados
-          </span>
+          <span>{t("Todos los derechos reservados")}</span>
 
         </div>
 

@@ -1,3 +1,5 @@
+import { business } from '../data/business'
+
 let currentRequest = null
 
 export const geocodeAddress = async (address) => {
@@ -8,13 +10,13 @@ export const geocodeAddress = async (address) => {
   }
 
   const cacheKey =
-    `bakery-location:${address}`
+    `bakery-location:${business.countryCode}:${address}`
 
-  const cachedLocation =
-    sessionStorage.getItem(cacheKey)
-
-  if (cachedLocation) {
-    return JSON.parse(cachedLocation)
+  try {
+    const cachedLocation = sessionStorage.getItem(cacheKey)
+    if (cachedLocation) return JSON.parse(cachedLocation)
+  } catch {
+    // Location lookup also works when browser storage is unavailable.
   }
 
   if (currentRequest) {
@@ -25,9 +27,12 @@ export const geocodeAddress = async (address) => {
     'https://nominatim.openstreetmap.org/search' +
     `?format=jsonv2` +
     `&limit=1` +
+    `&countrycodes=${business.countryCode}` +
+    `&accept-language=en` +
     `&q=${encodeURIComponent(address)}`
 
   currentRequest = fetch(url, {
+    signal: AbortSignal.timeout(10000),
     headers: {
       Accept: 'application/json',
     },
@@ -59,10 +64,11 @@ export const geocodeAddress = async (address) => {
           result.display_name,
       }
 
-      sessionStorage.setItem(
-        cacheKey,
-        JSON.stringify(location)
-      )
+      try {
+        sessionStorage.setItem(cacheKey, JSON.stringify(location))
+      } catch {
+        // Caching is optional.
+      }
 
       return location
     })

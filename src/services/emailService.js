@@ -1,4 +1,6 @@
 import emailjs from '@emailjs/browser'
+import { createTranslator, formatMoney, locales } from '../i18n/translations'
+import { business } from '../data/business'
 
 const serviceId =
   import.meta.env.VITE_EMAILJS_SERVICE_ID
@@ -13,21 +15,24 @@ export const sendOrderEmail = async ({
   customer,
   cart,
   subtotal,
+  language = 'es',
 }) => {
+  const t = createTranslator(language)
+  const formatPrice = (amount) => formatMoney(amount, language)
   if (
     !serviceId ||
     !templateId ||
     !publicKey
   ) {
     throw new Error(
-      'EmailJS no está configurado correctamente.'
+      t('EmailJS no está configurado correctamente.')
     )
   }
 
   const orderDetails = cart
     .map(
       (item) =>
-        `${item.quantity} x ${item.name} - ` +
+        `${item.quantity} x ${t(item.name)} - ` +
         formatPrice(
           item.price * item.quantity
         )
@@ -42,21 +47,21 @@ export const sendOrderEmail = async ({
       customer.phone,
 
     customer_email:
-      customer.email || 'No proporcionado',
+      customer.email || t('No proporcionado'),
 
     order_type:
       customer.orderType === 'delivery'
-        ? 'Domicilio'
-        : 'Recoger en la panadería',
+        ? t('Domicilio')
+        : t('Recoger en la panadería'),
 
     customer_address:
       customer.orderType === 'delivery'
         ? customer.address
-        : 'No aplica',
+        : t('No aplica'),
 
     order_notes:
       customer.notes ||
-      'Sin observaciones',
+      t('Sin observaciones'),
 
     order_details:
       orderDetails,
@@ -66,10 +71,11 @@ export const sendOrderEmail = async ({
 
     order_date:
       new Intl.DateTimeFormat(
-        'es-CO',
+        locales[language] || locales.es,
         {
           dateStyle: 'long',
           timeStyle: 'short',
+          timeZone: business.timeZone,
         }
       ).format(new Date()),
   }
@@ -82,15 +88,4 @@ export const sendOrderEmail = async ({
       publicKey,
     }
   )
-}
-
-const formatPrice = (price) => {
-  return new Intl.NumberFormat(
-    'es-CO',
-    {
-      style: 'currency',
-      currency: 'COP',
-      maximumFractionDigits: 0,
-    }
-  ).format(price)
 }

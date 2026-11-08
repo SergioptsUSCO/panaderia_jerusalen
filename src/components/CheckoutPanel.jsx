@@ -1,3 +1,4 @@
+import { useI18n } from '../i18n/useI18n'
 import { useEffect, useState } from 'react'
 import {
   sendOrderEmail,
@@ -14,6 +15,8 @@ function CheckoutPanel({
   onBackToCart,
   onOrderSuccess,
 }) {
+  const { t, formatPrice, language } = useI18n()
+
   const [formData, setFormData] = useState({
     name: '',
     phone: '',
@@ -46,13 +49,7 @@ function CheckoutPanel({
       message: '',
     })
 
-  const formatPrice = (price) => {
-    return new Intl.NumberFormat('es-CO', {
-      style: 'currency',
-      currency: 'COP',
-      maximumFractionDigits: 0,
-    }).format(price)
-  }
+
 
   const subtotal = cart.reduce(
     (total, item) =>
@@ -120,7 +117,7 @@ function CheckoutPanel({
     const productsText = cart
       .map(
         (item) =>
-          `${item.quantity} x ${item.name} - ` +
+          `${item.quantity} x ${t(item.name)} - ` +
           `${formatPrice(
             item.price * item.quantity
           )}`
@@ -129,26 +126,26 @@ function CheckoutPanel({
 
     const deliveryText =
       formData.orderType === 'delivery'
-        ? `Domicilio\nDirección: ${formData.address}`
-        : 'Recoger en la panadería'
+        ? `${t('Domicilio')}\n${t('Dirección')}: ${formData.address}`
+        : t('Recoger en la panadería')
 
     return `
-Hola, Panadería Jerusalén 👋
+${t('Hola, Panadería Jerusalén 👋')}
 
-Quiero realizar el siguiente pedido:
+${t('Quiero realizar el siguiente pedido:')}
 
 ${productsText}
 
-Subtotal: ${formatPrice(subtotal)}
+${t('Subtotal')}: ${formatPrice(subtotal)}
 
-DATOS DEL CLIENTE
+${t('DATOS DEL CLIENTE')}
 
-Nombre: ${formData.name}
-Teléfono: ${formData.phone}
-Tipo de pedido: ${deliveryText}
+${t('Nombre')}: ${formData.name}
+${t('Teléfono')}: ${formData.phone}
+${t('Tipo de pedido')}: ${deliveryText}
 
-Observaciones:
-${formData.notes || 'Sin observaciones'}
+${t('Observaciones')}:
+${formData.notes || t('Sin observaciones')}
     `.trim()
   }
 
@@ -175,6 +172,7 @@ ${formData.notes || 'Sin observaciones'}
         customer: formData,
         cart,
         subtotal,
+        language,
       })
 
       setSubmitStatus({
@@ -245,18 +243,14 @@ ${formData.notes || 'Sin observaciones'}
             type="button"
             className="checkout-panel__back"
             onClick={onBackToCart}
-          >
-            ← Volver
-          </button>
+          >{t("← Volver")}</button>
 
           <button
             type="button"
             className="checkout-panel__close"
             onClick={onClose}
-            aria-label="Cerrar checkout"
-          >
-            ×
-          </button>
+            aria-label={t("Cerrar checkout")}
+          >{t("×")}</button>
 
         </div>
 
@@ -264,19 +258,12 @@ ${formData.notes || 'Sin observaciones'}
 
           <div className="checkout-panel__intro">
 
-            <span>
-              FINALIZAR PEDIDO
-            </span>
+            <span>{t("FINALIZAR PEDIDO")}</span>
 
-            <h2>
-              Ya casi está
-              <strong> listo.</strong>
+            <h2>{t("Ya casi está")}<strong>{t(" listo.")}</strong>
             </h2>
 
-            <p>
-              Completa tus datos para preparar
-              correctamente tu pedido.
-            </p>
+            <p>{t("Completa tus datos para preparar correctamente tu pedido.")}</p>
 
           </div>
 
@@ -287,22 +274,20 @@ ${formData.notes || 'Sin observaciones'}
 
             <div className="checkout-form__group">
 
-              <label htmlFor="name">
-                Nombre completo
-              </label>
+              <label htmlFor="name">{t("Nombre completo")}</label>
 
               <input
                 id="name"
                 name="name"
                 type="text"
-                placeholder="Ej. Juan Pérez"
+                placeholder={t("Ej. Juan Pérez")}
                 value={formData.name}
                 onChange={handleChange}
               />
 
               {errors.name && (
                 <span className="checkout-form__error">
-                  {errors.name}
+                  {t(errors.name)}
                 </span>
               )}
 
@@ -312,22 +297,20 @@ ${formData.notes || 'Sin observaciones'}
 
               <div className="checkout-form__group">
 
-                <label htmlFor="phone">
-                  Teléfono
-                </label>
+                <label htmlFor="phone">{t("Teléfono")}</label>
 
                 <input
                   id="phone"
                   name="phone"
                   type="tel"
-                  placeholder="3001234567"
+                  placeholder={t("3001234567")}
                   value={formData.phone}
                   onChange={handleChange}
                 />
 
                 {errors.phone && (
                   <span className="checkout-form__error">
-                    {errors.phone}
+                    {t(errors.phone)}
                   </span>
                 )}
 
@@ -335,23 +318,21 @@ ${formData.notes || 'Sin observaciones'}
 
               <div className="checkout-form__group">
 
-                <label htmlFor="email">
-                  Correo
-                  <span> opcional</span>
+                <label htmlFor="email">{t("Correo")}<span>{t(" opcional")}</span>
                 </label>
 
                 <input
                   id="email"
                   name="email"
                   type="email"
-                  placeholder="correo@email.com"
+                  placeholder={t("correo@email.com")}
                   value={formData.email}
                   onChange={handleChange}
                 />
 
                 {errors.email && (
                   <span className="checkout-form__error">
-                    {errors.email}
+                    {t(errors.email)}
                   </span>
                 )}
 
@@ -361,9 +342,7 @@ ${formData.notes || 'Sin observaciones'}
 
             <fieldset className="checkout-form__delivery">
 
-              <legend>
-                ¿Cómo quieres recibir tu pedido?
-              </legend>
+              <legend>{t("¿Cómo quieres recibir tu pedido?")}</legend>
 
               <label
                 className={
@@ -384,14 +363,9 @@ ${formData.notes || 'Sin observaciones'}
                 />
 
                 <div>
-                  <strong>
-                    Recoger
-                  </strong>
+                  <strong>{t("Recoger")}</strong>
 
-                  <span>
-                    Recógelo directamente
-                    en la panadería.
-                  </span>
+                  <span>{t("Recógelo directamente en la panadería.")}</span>
                 </div>
 
               </label>
@@ -415,14 +389,9 @@ ${formData.notes || 'Sin observaciones'}
                 />
 
                 <div>
-                  <strong>
-                    Domicilio
-                  </strong>
+                  <strong>{t("Domicilio")}</strong>
 
-                  <span>
-                    Enviamos tu pedido
-                    hasta tu ubicación.
-                  </span>
+                  <span>{t("Enviamos tu pedido hasta tu ubicación.")}</span>
                 </div>
 
               </label>
@@ -433,22 +402,20 @@ ${formData.notes || 'Sin observaciones'}
 
               <div className="checkout-form__group">
 
-                <label htmlFor="address">
-                  Dirección
-                </label>
+                <label htmlFor="address">{t("Dirección")}</label>
 
                 <input
                   id="address"
                   name="address"
                   type="text"
-                  placeholder="Calle, carrera, barrio..."
+                  placeholder={t("Calle, carrera, barrio...")}
                   value={formData.address}
                   onChange={handleChange}
                 />
 
                 {errors.address && (
                   <span className="checkout-form__error">
-                    {errors.address}
+                    {t(errors.address)}
                   </span>
                 )}
 
@@ -458,16 +425,14 @@ ${formData.notes || 'Sin observaciones'}
 
             <div className="checkout-form__group">
 
-              <label htmlFor="notes">
-                Observaciones
-                <span> opcional</span>
+              <label htmlFor="notes">{t("Observaciones")}<span>{t(" opcional")}</span>
               </label>
 
               <textarea
                 id="notes"
                 name="notes"
                 rows="4"
-                placeholder="Ej. Sin azúcar, llamar al llegar..."
+                placeholder={t("Ej. Sin azúcar, llamar al llegar...")}
                 value={formData.notes}
                 onChange={handleChange}
               />
@@ -476,9 +441,7 @@ ${formData.notes || 'Sin observaciones'}
 
             <div className="checkout-summary">
 
-              <span className="checkout-summary__label">
-                TU PEDIDO
-              </span>
+              <span className="checkout-summary__label">{t("TU PEDIDO")}</span>
 
               <div className="checkout-summary__products">
 
@@ -490,7 +453,7 @@ ${formData.notes || 'Sin observaciones'}
                   >
 
                     <span>
-                      {item.quantity} × {item.name}
+                      {item.quantity}{t(" × ")}{t(item.name)}
                     </span>
 
                     <strong>
@@ -508,9 +471,7 @@ ${formData.notes || 'Sin observaciones'}
 
               <div className="checkout-summary__total">
 
-                <span>
-                  Subtotal
-                </span>
+                <span>{t("Subtotal")}</span>
 
                 <strong>
                   {formatPrice(subtotal)}
@@ -520,10 +481,7 @@ ${formData.notes || 'Sin observaciones'}
 
               {formData.orderType === 'delivery' && (
 
-                <p className="checkout-summary__delivery-note">
-                  El valor del domicilio será
-                  confirmado por la panadería.
-                </p>
+                <p className="checkout-summary__delivery-note">{t("El valor del domicilio será confirmado por la panadería.")}</p>
 
               )}
 
@@ -537,7 +495,7 @@ ${formData.notes || 'Sin observaciones'}
                     : 'checkout-status checkout-status--error'
                 }
               >
-                {submitStatus.message}
+                {t(submitStatus.message)}
               </div>
 
             )}
@@ -548,8 +506,8 @@ ${formData.notes || 'Sin observaciones'}
               disabled={isSending}
             >
               {isSending
-                ? 'Registrando pedido...'
-                : 'Confirmar pedido'}
+                ? t('Registrando pedido...')
+                : t('Confirmar pedido')}
 
               {!isSending && (
                 <span>→</span>

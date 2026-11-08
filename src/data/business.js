@@ -9,11 +9,16 @@ export const business = {
 
   email: 'contacto@panaderiajerusalen.com',
 
-  address: 'Neiva, Huila, Colombia',
+  address: '433 NY-52, Woodbourne, NY 12788',
+
+  countryCode: 'us',
+
+  timeZone: 'America/New_York',
 
   location: {
-    lat: 2.943105070098161,
-    lng: -75.29821224292569,
+    // Verified using the written Woodbourne address in Nominatim.
+    lat: 41.7553553,
+    lng: -74.5817047,
     zoom: 15,
   },
 

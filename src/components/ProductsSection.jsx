@@ -1,4 +1,5 @@
-import { useState } from 'react'
+import { useI18n } from '../i18n/useI18n'
+import { useCallback, useState } from 'react'
 
 import ProductCard from './ProductCard'
 import ProductModal from './ProductModal'
@@ -13,11 +14,15 @@ import './ProductsSection.css'
 function ProductsSection({
   onAddToCart,
 }) {
+  const { t } = useI18n()
+
   const [activeCategory, setActiveCategory] = useState('todos')
   const [
     selectedProduct,
     setSelectedProduct,
   ] = useState(null)
+
+  const closeProduct = useCallback(() => setSelectedProduct(null), [])
 
   const filteredProducts =
     activeCategory === 'todos'
@@ -35,21 +40,13 @@ function ProductsSection({
         <div className="products-section__header">
 
           <div>
-            <span className="products-section__eyebrow">
-              NUESTRO MENÚ
-            </span>
+            <span className="products-section__eyebrow">{t("NUESTRO MENÚ")}</span>
 
-            <h2 className="products-section__title">
-              Algo rico para
-              <span> cada momento.</span>
+            <h2 className="products-section__title">{t("Algo rico para")}<span>{t(" cada momento.")}</span>
             </h2>
           </div>
 
-          <p className="products-section__intro">
-            Descubre nuestros panes, hojaldres,
-            postres y preparaciones elaboradas
-            diariamente.
-          </p>
+          <p className="products-section__intro">{t("Descubre nuestros panes, hojaldres, postres y preparaciones elaboradas diariamente.")}</p>
 
         </div>
 
@@ -68,7 +65,7 @@ function ProductsSection({
                 setActiveCategory(category.id)
               }
             >
-              {category.name}
+              {t(category.name)}
             </button>
           ))}
 
@@ -92,9 +89,7 @@ function ProductsSection({
       </div>
           <ProductModal
             product={selectedProduct}
-            onClose={() =>
-              setSelectedProduct(null)
-            }
+            onClose={closeProduct}
             onAddToCart={onAddToCart}
           />
     </section>
