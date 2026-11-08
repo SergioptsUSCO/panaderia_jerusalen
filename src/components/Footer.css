@@ -1,0 +1,185 @@
+/* FOOTER */
+
+.footer {
+  width: 100%;
+
+  padding: 75px 0 25px;
+
+  overflow: hidden;
+
+  background: #6d4229;
+  color: var(--color-white);
+}
+
+
+/* PARTE SUPERIOR */
+
+.footer__brand {
+  min-width: 0;
+
+  flex-shrink: 0;
+}
+
+.footer__brand-logo {
+  width: 235px;
+  height: auto;
+
+  display: block;
+
+
+}
+
+.footer__slogan {
+  max-width: 300px;
+
+  color: #cbb9ae;
+
+  font-size: 14px;
+
+  line-height: 1.6;
+}
+
+
+/* COLUMNAS */
+
+.footer__grid {
+  display: grid;
+
+  grid-template-columns:
+    1fr 1fr 1fr;
+
+  gap: 60px;
+
+  padding: 50px 0;
+}
+
+.footer__grid > * {
+  min-width: 0;
+}
+
+.footer__label {
+  display: block;
+
+  margin-bottom: 18px;
+
+  color: var(--color-golden);
+
+  font-size: 9px;
+  font-weight: 800;
+
+  letter-spacing: 2px;
+}
+
+.footer__links {
+  display: flex;
+  flex-direction: column;
+
+  align-items: flex-start;
+
+  gap: 11px;
+
+  min-width: 0;
+}
+
+.footer__links a {
+  max-width: 100%;
+
+  color: #d7c8bf;
+
+  text-decoration: none;
+
+  font-size: 13px;
+
+  overflow-wrap: anywhere;
+
+  transition: color 0.2s ease;
+}
+
+.footer__links a:hover {
+  color: var(--color-white);
+}
+
+
+/* PARTE INFERIOR */
+
+.footer__bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 30px;
+
+  padding-top: 22px;
+
+  border-top:
+    1px solid rgba(255, 255, 255, 0.12);
+
+  color: #a99285;
+
+  font-size: 11px;
+}
+
+
+/* TABLET */
+
+@media (max-width: 800px) {
+
+  .footer__top {
+    align-items: flex-start;
+    flex-direction: column;
+
+    gap: 22px;
+  }
+
+  .footer__grid {
+    grid-template-columns:
+      repeat(2, minmax(0, 1fr));
+
+    gap: 40px;
+  }
+
+  .footer__brand-logo {
+    width: 210px;
+  }
+
+}
+
+
+/* CELULAR */
+
+@media (max-width: 560px) {
+
+  .footer {
+    padding-top: 55px;
+  }
+
+  .footer__top {
+    padding-bottom: 32px;
+  }
+
+  .footer__brand-logo {
+    width: 185px;
+  }
+
+  .footer__slogan {
+    max-width: 250px;
+
+    font-size: 13px;
+  }
+
+  .footer__grid {
+    grid-template-columns: 1fr;
+
+    gap: 32px;
+
+    padding: 38px 0;
+  }
+
+  .footer__bottom {
+    align-items: flex-start;
+    flex-direction: column;
+
+    gap: 8px;
+  }
+
+}

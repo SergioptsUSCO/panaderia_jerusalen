@@ -1,0 +1,35 @@
+:root {
+  --color-cream: #fff8ed;
+  --color-wheat: #f1dfc3;
+  --color-terracotta: #b85732;
+  --color-golden: #d99b45;
+  --color-coffee: #38251b;
+  --color-olive: #6e7047;
+  --color-white: #fffdf8;
+  --color-ivory: var(--color-white);
+
+  --color-text: var(--color-coffee);
+  --color-background: var(--color-cream);
+  --color-surface: var(--color-white);
+
+--font-display:
+  "DM Serif Display",
+  Georgia,
+  serif;
+
+--font-body:
+  "Inter",
+  system-ui,
+  -apple-system,
+  BlinkMacSystemFont,
+  "Segoe UI",
+  sans-serif;
+
+  --container-width: 1200px;
+  --section-padding: 96px;
+  --radius-small: 10px;
+  --radius-medium: 20px;
+  --radius-pill: 999px;
+
+  --shadow-soft: 0 16px 40px rgba(56, 37, 27, 0.1);
+}

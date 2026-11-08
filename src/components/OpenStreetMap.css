@@ -1,0 +1,179 @@
+.open-street-map__wrapper {
+  position: relative;
+
+  width: 100%;
+  max-width: 100%;
+
+  min-width: 0;
+  min-height: 520px;
+
+  overflow: hidden;
+
+  border-radius: 28px;
+}
+
+.open-street-map__loading {
+  position: absolute;
+
+  inset: 0;
+
+  z-index: 500;
+
+  display: flex;
+  flex-direction: column;
+
+  align-items: center;
+  justify-content: center;
+
+  gap: 8px;
+
+  background: var(--color-wheat);
+
+  border-radius: 28px;
+
+  text-align: center;
+}
+
+.open-street-map__status {
+  position: absolute;
+
+  left: 18px;
+  bottom: 28px;
+
+  z-index: 500;
+
+  max-width: calc(100% - 36px);
+
+  display: flex;
+  align-items: flex-start;
+
+  gap: 8px;
+
+  padding: 10px 14px;
+
+  background: rgba(
+    255,
+    253,
+    248,
+    0.93
+  );
+
+  color: var(--color-coffee);
+
+  border-radius: 10px;
+
+  box-shadow:
+    0 8px 25px
+    rgba(56, 37, 27, 0.15);
+
+  font-size: 10px;
+
+  line-height: 1.4;
+
+  pointer-events: none;
+}
+
+.open-street-map__loading > span {
+  margin-bottom: 5px;
+
+  font-size: 42px;
+}
+
+.open-street-map__loading strong {
+  color: var(--color-coffee);
+
+  font-family: var(--font-display);
+
+  font-size: 24px;
+}
+
+.open-street-map__loading p {
+  color: #78655a;
+
+  font-size: 12px;
+}
+
+.open-street-map {
+  position: relative;
+
+  z-index: 1;
+
+  width: 100%;
+  max-width: 100%;
+
+  min-width: 0;
+  min-height: 520px;
+
+  overflow: hidden;
+
+  background: var(--color-wheat);
+
+  border-radius: 28px;
+}
+
+/* Controles de Leaflet */
+
+.open-street-map
+.leaflet-control-zoom {
+  overflow: hidden;
+
+  border: none;
+
+  border-radius: 12px;
+
+  box-shadow:
+    0 8px 25px rgba(56, 37, 27, 0.15);
+}
+
+.open-street-map
+.leaflet-control-zoom a {
+  color: var(--color-coffee);
+
+  border: none;
+}
+
+.open-street-map
+.leaflet-control-zoom a:hover {
+  background: var(--color-wheat);
+  color: var(--color-terracotta);
+}
+
+/* Popup */
+
+.open-street-map
+.leaflet-popup-content-wrapper {
+  border-radius: 14px;
+
+  color: var(--color-coffee);
+
+  font-family: var(--font-body);
+}
+
+.open-street-map
+.leaflet-popup-content {
+  line-height: 1.6;
+}
+
+/* Atribución */
+
+.open-street-map
+.leaflet-control-attribution {
+  font-size: 9px;
+}
+
+@media (max-width: 700px) {
+
+  .open-street-map__wrapper,
+  .open-street-map {
+    min-height: 340px;
+  }
+
+  .open-street-map__status {
+    left: 10px;
+    bottom: 20px;
+
+    max-width:
+      calc(100% - 20px);
+  }
+
+}
